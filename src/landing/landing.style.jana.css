@@ -1,0 +1,147 @@
+.container_JanuaryA {
+    background: #000000;
+    filter: blur(0);
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
+.imageDiv_JanuaryA {
+    background-image: url(https://hertz-168.s3.amazonaws.com/landing/january/ice_hummocks_by_dshamanov_d34iq76-fullview.jpg);
+    background-size: cover;
+    display: grid;
+    grid-template-columns: [col1] 1fr [col2] 1fr [col3] 1fr [col4] 1fr [col5] 1fr [col6] 1fr [col7] 1fr [col8] 1fr [col9] 1fr [col10] 1fr [col11] 1fr [col12] 1fr [col13] 1fr [col14] 1fr [col15] 1fr [col16] 1fr [colEnd];
+    grid-template-rows: [row1] 1fr [row2] 1fr [row3] 1fr [row4] 1fr [row5] 1fr [row6] 1fr [row7] 1fr [row8] 1fr [row9] 1fr [row10] 1fr [row11] 1fr [row12] 1fr [row13] 1fr [row14] 1fr [row15] 1fr [row16] 1fr [rowEnd];
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: relative;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+.landingLeftSpeaker_JanuaryA {
+    backdrop-filter: blur(14px) contrast(200%) hue-rotate(-90deg);
+    background-image: url(https://hertz-168.s3.amazonaws.com/landing/january/speakers/speaker_by_littlearturo_d2tgk59-fullview.jpg);
+    background-size: cover;
+    filter: drop-shadow(-10px -60px 25px #509eb4);
+    grid-column: col1 / col6;
+    grid-row: row6 / rowEnd;
+    opacity: 0.7;
+    transform: skew(10deg);
+}
+
+.landingRightSpeaker_JanuaryA {
+    backdrop-filter: blur(14px) contrast(200%) hue-rotate(-90deg);
+    background-image: url(https://hertz-168.s3.amazonaws.com/landing/january/speakers/speaker_by_littlearturo_d2tgk59-fullview.jpg);
+    background-size: cover;
+    filter: drop-shadow(10px -60px 25px #509eb4);
+    grid-column: col12 / colEnd;
+    grid-row: row6 / rowEnd;
+    opacity: 0.7;
+    transform: skew(-10deg);
+}
+
+.landingVibration_JanuaryA {
+    grid-column: col5 / col13;
+    grid-row: row6 / row11;
+    opacity: 1;
+    width: 100%;
+}
+
+.landingTitle_JanuaryA {
+    color: #303a3e;
+    font-family: 'Jura', sans-serif;
+    font-size: 60px;
+    grid-column: col2 / col7;
+    grid-row: row2 / row4;
+}
+
+.landingLoginButton_JanuaryA {
+    background: #406288;
+    border: none;
+    color: #c1d6e9;
+    cursor: pointer;
+    font-family: 'Jura', sans-serif;
+    font-size: 24px;
+    grid-column: col11 / col12;
+    grid-row: row2 / row3;
+    outline-color: #a0b1c4;
+    transition: all 0.3s linear;
+}
+
+.landingLoginButton_JanuaryA:hover {
+    background: #509eb4;
+    color: #021825;
+    transition: all 0.3s linear;
+}
+
+.landingLoginButton_JanuaryA:active {
+    filter: invert(100%);
+    transition: all 0.1s linear;
+}
+
+.landingAboutButton_JanuaryA {
+    background: #406288;
+    border: none;
+    color: #c1d6e9;
+    cursor: pointer;
+    font-family: 'Jura', sans-serif;
+    font-size: 24px;
+    grid-column: col13 / col14;
+    grid-row: row2 / row3;
+    outline-color: #a0b1c4;
+    transition: all 0.3s linear;
+}
+
+.landingAboutButton_JanuaryA:hover {
+    background: #509eb4;
+    color: #021825;
+    transition: all 0.3s linear;
+}
+
+.landingAboutButton_JanuaryA:active {
+    filter: invert(100%);
+    transition: all 0.1s linear;
+}
+
+.landingSignupButton_JanuaryA {
+    background: #406288;
+    border: none;
+    color: #c1d6e9;
+    cursor: pointer;
+    font-family: 'Jura', sans-serif;
+    font-size: 24px;
+    grid-column: col15 / col16;
+    grid-row: row2 / row3;
+    outline-color: #a0b1c4;
+    transition: all 0.3s linear;
+}
+
+.landingSignupButton_JanuaryA:hover {
+    background: #509eb4;
+    color: #021825;
+    transition: all 0.3s linear;
+}
+
+.landingSignupButton_JanuaryA:active {
+    filter: invert(100%);
+    transition: all 0.1s linear;
+}
+
+.landingFooter_JanuaryA {
+    color: #303a3e;
+    filter: brightness(80%);
+    font-family: 'Jura', sans-serif;
+    font-size: 12px;
+    grid-column: col10 / col13;
+    grid-row: row16 / rowEnd;
+    transform: translateY(4vh);
+}
