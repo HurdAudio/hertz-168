@@ -64,6 +64,11 @@
     grid-row: row2 / row4;
 }
 
+.landingLoginButtonLink_JanuaryA {
+    grid-column: col11 / col12;
+    grid-row: row2 / row3;
+}
+
 .landingLoginButton_JanuaryA {
     background: #406288;
     border: none;
@@ -71,10 +76,10 @@
     cursor: pointer;
     font-family: 'Jura', sans-serif;
     font-size: 24px;
-    grid-column: col11 / col12;
-    grid-row: row2 / row3;
+    height: 100%;
     outline-color: #a0b1c4;
     transition: all 0.3s linear;
+    width: 100%;
 }
 
 .landingLoginButton_JanuaryA:hover {

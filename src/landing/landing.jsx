@@ -6,6 +6,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Login from '../login/login';
 import './landing.style.jana.css';
 
 const now = new Date();
@@ -29,7 +30,10 @@ function Landing() {
                 <div className={'container' + landingMonth}>
                     <div className={'imageDiv' + landingMonth}>
                         <h1 className={'landingTitle' + landingMonth}>168 Hertz</h1>
-                        <button className={'landingLoginButton' + landingMonth}>login</button>
+                        <Link className={'landingLoginButtonLink' + landingMonth}
+                            to="/login">
+                            <button className={'landingLoginButton' + landingMonth}>login</button>
+                        </Link>
                         <button className={'landingAboutButton' + landingMonth}>about</button>
                         <button className={'landingSignupButton' + landingMonth}>signup</button>
                         <div className={'landingLeftSpeaker' + landingMonth}></div>
@@ -39,6 +43,11 @@ function Landing() {
                         <p className={'landingFooter' + landingMonth}>{landingFooterMessage}</p>
                     </div>
                 </div>
+                <Switch>
+                    <Route path="/login">
+                        <Login />
+                    </Route>
+                </Switch>
             </Router>
         );
 }
