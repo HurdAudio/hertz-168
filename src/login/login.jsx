@@ -63,6 +63,20 @@ function Login() {
         }
     }
     
+    const checkCreds = () => {
+        let localStorage = window.localStorage;
+        
+        if (emailValue === 'devin@devinhurd.com') {
+            if (passwordValue === 'password') {
+                localStorage.setItem('vibratingAt168Hertz', true);
+                window.location.reload(false);
+            } else {
+                localStorage.setItem('vibratingAt168Hertz', false);
+            }
+        }
+        
+    }
+        
     return(
         <div className={'loginContainer' + loginMonth}>
             <div className={'loginImageDiv' + loginMonth}>
@@ -84,7 +98,8 @@ function Login() {
                             placeholder="password"
                             type="password"
                             value={passwordValue} />
-                        {((emailValue.indexOf('@') !== -1) && (passwordValue.length > 0)) && (<NavLink className={'loginSubmitNav' + loginMonth} to="/"><button className={'loginSubmitButton' + loginMonth}>submit</button></NavLink>)}
+                        {((emailValue.indexOf('@') !== -1) && (passwordValue.length > 0)) && (<NavLink className={'loginSubmitNav' + loginMonth} to="/"><button className={'loginSubmitButton' + loginMonth}
+                            onClick={() => checkCreds()}>submit</button></NavLink>)}
                         {((emailValue.indexOf('@') === -1) || (passwordValue.length === 0)) && (<button className={'loginSubmitButtonHidden' + loginMonth}>submit</button>)}
                         {(emailValue.indexOf('@') !== -1) && (<p className={'loginForgotPassword' + loginMonth}>forgot password?</p>)}
                         <p className={'loginFooter' + loginMonth}>{landingFooterMessage}</p>
