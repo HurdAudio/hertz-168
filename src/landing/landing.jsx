@@ -24,37 +24,44 @@ landingFooterMessage += 'HurdAudio';
 const janAVibration = 'https://hertz-168.s3.amazonaws.com/landing/january/vibration/sound_wave_frequency_vibration_hertz_pressure_pitch-512.png';
 const janBVibration = 'https://hertz-168.s3.amazonaws.com/landing/january/vibration/aca6b497ffa33ed2ff03ac84be7a9678.jpg';
 
-
 function Landing() {
     
     const [landingMonth, setLandingMonth] = useState('_JanuaryB');
     const [landingVibaration, setLandingVibration] = useState(janBVibration);
+    
+    const checkLogin = () => {
+        if (window.localStorage.getItem('vibratingAt168Hertz') === 'true') {
+            window.location.reload(false);
+        }
+    }
+    
+    checkLogin();
         
-        return(
-            <Router>
-                <div className={'container' + landingMonth}>
-                    <div className={'imageDiv' + landingMonth}>
-                        <h1 className={'landingTitle' + landingMonth}>168 Hertz</h1>
-                        <Link className={'landingLoginButtonLink' + landingMonth}
-                            to="/login">
-                            <button className={'landingLoginButton' + landingMonth}>login</button>
-                        </Link>
-                        <button className={'landingAboutButton' + landingMonth}>about</button>
-                        <button className={'landingSignupButton' + landingMonth}>signup</button>
-                        <div className={'landingLeftSpeaker' + landingMonth}></div>
-                        <div className={'landingRightSpeaker' + landingMonth}></div>
-                        <img className={'landingVibration' + landingMonth}
-                            src={landingVibaration} />
-                        <p className={'landingFooter' + landingMonth}>{landingFooterMessage}</p>
-                    </div>
+    return(
+        <Router>
+            <div className={'container' + landingMonth}>
+                <div className={'imageDiv' + landingMonth}>
+                    <h1 className={'landingTitle' + landingMonth}>168 Hertz</h1>
+                    <Link className={'landingLoginButtonLink' + landingMonth}
+                        to="/login">
+                        <button className={'landingLoginButton' + landingMonth}>login</button>
+                    </Link>
+                    <button className={'landingAboutButton' + landingMonth}>about</button>
+                    <button className={'landingSignupButton' + landingMonth}>signup</button>
+                    <div className={'landingLeftSpeaker' + landingMonth}></div>
+                    <div className={'landingRightSpeaker' + landingMonth}></div>
+                    <img className={'landingVibration' + landingMonth}
+                        src={landingVibaration} />
+                    <p className={'landingFooter' + landingMonth}>{landingFooterMessage}</p>
                 </div>
-                <Switch>
-                    <Route path="/login">
-                        <Login />
-                    </Route>
-                </Switch>
-            </Router>
-        );
+            </div>
+            <Switch>
+                <Route path="/login">
+                    <Login />
+                </Route>
+            </Switch>
+        </Router>
+    );
 }
 
 export default Landing;
