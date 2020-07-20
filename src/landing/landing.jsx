@@ -9,6 +9,7 @@ import {
 import Login from '../login/login';
 import './landing.style.jana.css';
 import './landing.style.janb.css';
+import './landing.style.janc.css';
 
 const now = new Date();
 
@@ -23,11 +24,12 @@ landingFooterMessage += 'HurdAudio';
 
 const janAVibration = 'https://hertz-168.s3.amazonaws.com/landing/january/vibration/sound_wave_frequency_vibration_hertz_pressure_pitch-512.png';
 const janBVibration = 'https://hertz-168.s3.amazonaws.com/landing/january/vibration/aca6b497ffa33ed2ff03ac84be7a9678.jpg';
+const janCVibration = 'https://hertz-168.s3.amazonaws.com/landing/january/vibration/soundwaves.jpg';
 
 function Landing() {
     
-    const [landingMonth, setLandingMonth] = useState('_JanuaryB');
-    const [landingVibaration, setLandingVibration] = useState(janBVibration);
+    const [landingMonth, setLandingMonth] = useState('_JanuaryC');
+    const [landingVibaration, setLandingVibration] = useState(janCVibration);
     
     const checkLogin = () => {
         if (window.localStorage.getItem('vibratingAt168Hertz') === 'true') {
