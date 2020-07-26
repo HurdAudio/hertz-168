@@ -8,6 +8,7 @@ import {
   Link
 } from "react-router-dom";
 import './userhub.style.jana.css';
+import './userhub.style.janb.css';
 import TestBed from '../testbed/testbed';
 
 let userhubFooterMessage = '';
@@ -26,6 +27,7 @@ const userData = {
 }
 
 const janAVibration = 'https://hertz-168.s3.amazonaws.com/landing/january/vibration/sound_wave_frequency_vibration_hertz_pressure_pitch-512.png';
+const janBVibration = 'https://hertz-168.s3.amazonaws.com/landing/january/vibration/aca6b497ffa33ed2ff03ac84be7a9678.jpg';
 
 const placeholderMixer = [
     {
@@ -156,8 +158,8 @@ const placeholderCompositions = [
 
 function UserHub() {
     
-    const [hubMonth, setHubMonth] = useState('_JanuaryA');
-    const [logoImage, setLogoImage] = useState(janAVibration);
+    const [hubMonth, setHubMonth] = useState('_JanuaryB');
+    const [logoImage, setLogoImage] = useState(janBVibration);
     const [tabState, setTabState] = useState({
         compose: false,
         home: true,
