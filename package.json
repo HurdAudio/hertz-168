@@ -2,16 +2,32 @@
   "name": "hertz-168",
   "version": "0.1.0",
   "private": true,
-  "main": "./src/App.js",
+  "main": "./server.js",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.20.0",
+    "bcrypt": "^3.0.0",
+    "body-parser": "^1.19.0",
+    "cookie-session": "^1.4.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "knex": "^0.21.5",
+    "nanoid": "^3.1.12",
+    "nodemailer": "^6.4.11",
+    "nodemon": "^2.0.4",
+    "path": "^0.12.7",
+    "pg": "^8.3.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "request": "^2.88.2",
+    "uuid4": "^2.0.2",
+    "uuidjs": "^4.2.6"
   },
+  "proxy": "http://localhost:3048",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -19,8 +35,8 @@
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build"
   },
-  "engines": {	 
-      "node": "13.0.0"
+  "engines": {
+    "node": "10.0.0"
   },
   "eslintConfig": {
     "extends": "react-app"
