@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import audio_157431_1280 from '../img/audio_157431_1280.png';
 import './testbed.style.jana.css';
+import './testbed.style.janb.css';
 import '../masterVolume/masterVolume.style.jana.css';
 
 const modules = [
@@ -30,7 +31,7 @@ let audioContext = null;
 function TestBed() {
     
     const [testbedMainStatus, setTestbedMainStatus] = useState('_Active');
-    const [testbedMonth, setTestbedMonth] = useState('_JanuaryA');
+    const [testbedMonth, setTestbedMonth] = useState('_JanuaryB');
     const [masterVolumeMonth, setMasterVolumeMonth] = useState('_JanuaryA');
     const [testbedModules, setTestbedModules] = useState([
         {
