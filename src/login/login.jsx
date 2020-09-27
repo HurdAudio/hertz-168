@@ -5,6 +5,9 @@ import audio_157431_1280 from '../img/audio_157431_1280.png';
 import './login.style.jana.css';
 import './login.style.janb.css';
 import './login.style.janc.css';
+import EncryptPassword from './encryptPassword';
+import SetStatus from './setLoginStatus';
+import axios from 'axios';
 
 
 let landingFooterMessage = '';
@@ -78,6 +81,29 @@ function Login() {
         }
         
     }
+    
+    const executeLogin = () => {
+        axios(`/users/prelogin/${emailValue.toLowerCase()}`)
+        .then(securirtyInfoData => {
+            const security = securirtyInfoData.data;
+            if (security.key === null) {
+                errorMessaging('error: login fail');
+                localStorage.setItem('vibratingAt168Hertz', false);
+            } else {
+                const submitPasswordArray = EncryptPassword(passwordValue, security);
+                axios.post('/users/login', { email: emailValue, password: submitPasswordArray })
+                .then(userResponseData => {
+                    const response = userResponseData.data;
+                    SetStatus(response);
+                    if (response.login === 'forbidden') {
+                        errorMessaging('error: login fail');
+                    } else {
+                        errorMessaging('login success');
+                    }
+                });
+            }
+        });
+    }
         
     return(
         <div className={'loginContainer' + loginMonth}>
@@ -101,7 +127,7 @@ function Login() {
                             type="password"
                             value={passwordValue} />
                         {((emailValue.indexOf('@') !== -1) && (passwordValue.length > 0)) && (<NavLink className={'loginSubmitNav' + loginMonth} to="/"><button className={'loginSubmitButton' + loginMonth}
-                            onClick={() => checkCreds()}>submit</button></NavLink>)}
+                            onClick={() => executeLogin()}>submit</button></NavLink>)}
                         {((emailValue.indexOf('@') === -1) || (passwordValue.length === 0)) && (<button className={'loginSubmitButtonHidden' + loginMonth}>submit</button>)}
                         {(emailValue.indexOf('@') !== -1) && (<p className={'loginForgotPassword' + loginMonth}>forgot password?</p>)}
                         <p className={'loginFooter' + loginMonth}>{landingFooterMessage}</p>
