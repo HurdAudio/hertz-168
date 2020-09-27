@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   BrowserRouter as Router,
@@ -26,6 +26,8 @@ const janAVibration = 'https://hertz-168.s3.amazonaws.com/landing/january/vibrat
 const janBVibration = 'https://hertz-168.s3.amazonaws.com/landing/january/vibration/aca6b497ffa33ed2ff03ac84be7a9678.jpg';
 const janCVibration = 'https://hertz-168.s3.amazonaws.com/landing/january/vibration/soundwaves.jpg';
 
+let toLogin = false;
+
 function Landing() {
     
     const [landingMonth, setLandingMonth] = useState('_JanuaryC');
@@ -37,11 +39,14 @@ function Landing() {
         }
     }
     
-    checkLogin();
-        
+    const updateLoginAttempt = () => {
+        toLogin = true;
+    }
+            
     return(
         <Router>
-            <div className={'container' + landingMonth}>
+            <div className={'container' + landingMonth}
+                onMouseMove={() => checkLogin()}>
                 <div className={'imageDiv' + landingMonth}>
                     <h1 className={'landingTitle' + landingMonth}>168 Hertz</h1>
                     <Link className={'landingLoginButtonLink' + landingMonth}
