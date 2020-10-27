@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import audio_157431_1280 from '../img/audio_157431_1280.png';
 import './testbed.style.jana.css';
 import './testbed.style.janb.css';
+import './testbed.style.janc.css';
 import '../masterVolume/masterVolume.style.jana.css';
 import '../masterVolume/masterVolume.style.janb.css';
 import '../gain/gain.style.jana.css';
@@ -56,7 +57,7 @@ let audioContext = null;
 function TestBed() {
     
     const [testbedMainStatus, setTestbedMainStatus] = useState('_Active');
-    const [testbedMonth, setTestbedMonth] = useState('_JanuaryB');
+    const [testbedMonth, setTestbedMonth] = useState('_JanuaryC');
     const [masterVolumeMonth, setMasterVolumeMonth] = useState('_JanuaryB');
     const [gainMonth, setGainMonth] = useState('_JanuaryA');
     const [selectedModule, setSelectedModule] = useState('36eeb817-c015-4ebc-bc21-b20843b3bdf4');
