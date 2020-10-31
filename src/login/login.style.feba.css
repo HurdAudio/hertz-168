@@ -1,0 +1,157 @@
+.loginContainer_FebruaryA {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: absolute;
+    width: 100%;
+}
+
+.loginImageDiv_FebruaryA {
+    background-image: url(https://hertz-168.s3.amazonaws.com/login/february/fabric_fetish_by_little_miss_twisted_d1pcpy5-fullview.jpg);
+    background-size: cover;
+    display: grid;
+    grid-template-columns: [col1] 1fr [col2] 1fr [col3] 1fr [col4] 1fr [col5] 1fr [col6] 1fr [col7] 1fr [col8] 1fr [col9] 1fr [col10] 1fr [col11] 1fr [col12] 1fr [col13] 1fr [col14] 1fr [col15] 1fr [col16] 1fr [colEnd];
+    grid-template-rows: [row1] 1fr [row2] 1fr [row3] 1fr [row4] 1fr [row5] 1fr [row6] 1fr [row7] 1fr [row8] 1fr [row9] 1fr [row10] 1fr [row11] 1fr [row12] 1fr [row13] 1fr [row14] 1fr [row15] 1fr [row16] 1fr [rowEnd];
+    height: 100%;
+    left: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.loginReturnToLandingLink_FebruaryA {
+    backdrop-filter: saturate(1000%);
+    cursor: pointer;
+    grid-column: col1 / col3;
+    grid-row: row1 / row2;
+}
+
+.loginNavIcon_FebruaryA {
+    filter: hue-rotate(180deg);
+    height: 100%;
+    opacity: 0.8;
+    transform: rotateX(-360deg) rotateZ(180deg) scale(0.6) skew(0deg) translateX(-10px) translateY(-15px);
+    transition: all 0.9s ease-in;
+    width: 100%;
+}
+
+.loginNavIcon_FebruaryA:hover {
+    transform: rotateX(-180deg) rotateZ(180deg) scale(0.6) skew(0deg) translateX(-10px) translateY(15px);
+    transition: all 0.9s ease-in;
+}
+
+.loginTitle_FebruaryA {
+    color: #cccfd5;
+    font-family: 'Krub', sans-serif;
+    font-size: 60px;
+    grid-column: col3 / col7;
+    grid-row: row1 / row3;
+    transform: translateY(40px);
+}
+
+.loginFormField_FebruaryA {
+    backdrop-filter: blur(12px) contrast(200%) hue-rotate(-135deg) saturate(15%);
+    grid-column: col8 / col14;
+    grid-row: row4 / row12;
+}
+
+.loginFormContainer_FebruaryA {
+    display: grid;
+    grid-template-columns: [acol1] 1fr [acol2] 1fr [acol3] 1fr [acol4] 1fr [acol5] 1fr [acol6] 1fr [acol7] 1fr [acol8] 1fr [acol9] 1fr [acol10] 1fr [acol11] 1fr [acol12] 1fr [acol13] 1fr [acol14] 1fr [acol15] 1fr [acol16] 1fr [acolEnd];
+    grid-template-rows: [arow1] 1fr [arow2] 1fr [arow3] 1fr [arow4] 1fr [arow5] 1fr [arow6] 1fr [arow7] 1fr [arow8] 1fr [arow9] 1fr [arow10] 1fr [arowEnd];
+}
+
+.loginFormLabel_FebruaryA {
+    color: #cccfd5;
+    filter: brightness(300%);
+    font-family: 'Krub', sans-serif;
+    font-size: 18px;
+    grid-column: acol5 / acol16;
+    grid-row: arow3 / arow4;
+}
+
+.loginEmailInput_FebruaryA {
+    background: #aeb5bd;
+    border: none;
+    color: #010101;
+    font-family: 'Krub', sans-serif;
+    font-size: 18px;
+    grid-column: acol5 / acol16;
+    grid-row: arow4 / arow5;
+    height: 100%;
+    outline-color: #8d8d8f;
+}
+
+.loginPasswordInput_FebruaryA {
+    background: #aeb5bd;
+    border: none;
+    color: #010101;
+    font-family: 'Krub', sans-serif;
+    font-size: 18px;
+    grid-column: acol5 / acol16;
+    grid-row: arow6 / arow7;
+    outline-color: #8d8d8f;
+}
+
+.loginSubmitNav_FebruaryA {
+    grid-column: acol5 / acol16;
+    grid-row: arow8 / arow9;
+}
+
+.loginSubmitButton_FebruaryA {
+    background: #9fa7af;
+    border: none;
+    color: #010101;
+    cursor: pointer;
+    font-family: 'Krub', sans-serif;
+    font-size: 30px;
+    height: 100%;
+    outline-color: #8d8d8f;
+    transform: all 0.5s linear;
+    width: 100%;
+}
+
+.loginSubmitButtonHidden_FebruaryA {
+    font-size: 30px;
+    grid-column: acol5 / acol16;
+    grid-row: arow8 / arow9;
+    height: 100%;
+    width: 100%;
+    visibility: hidden;
+}
+
+.loginSubmitButton_FebruaryA:hover {
+    background: #010101;
+    color: #cccfd5;
+    transform: all 0.5s linear;
+}
+
+.loginSubmitButton_FebruaryA:active {
+    filter: invert(100%);
+}
+
+.loginForgotPassword_FebruaryA {
+    color: #cccfd5;
+    cursor: pointer;
+    font-family: 'Krub', sans-serif;
+    font-size: 18px;
+    grid-column: acol1 / acol8;
+    grid-row: arow4 / arow9;
+    transform: rotateZ(-90deg) translateX(90px) translateY(15px);
+}
+
+.loginForgotPassword_FebruaryA:hover {
+    color: #ff0000;
+    filter: brightness(110%);
+}
+
+.loginFooter_FebruaryA {
+    color: #cccfd5;
+    cursor: pointer;
+    font-family: 'Krub', sans-serif;
+    font-size: 12px;
+    grid-column: acol11 / acolEnd;
+    grid-row: arow10 / arowEnd;
+}

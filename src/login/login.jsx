@@ -5,6 +5,7 @@ import audio_157431_1280 from '../img/audio_157431_1280.png';
 import './login.style.jana.css';
 import './login.style.janb.css';
 import './login.style.janc.css';
+import './login.style.feba.css';
 import EncryptPassword from './encryptPassword';
 import SetStatus from './setLoginStatus';
 import axios from 'axios';
@@ -22,7 +23,7 @@ landingFooterMessage += 'HurdAudio';
 
 function Login() {
     
-    const [loginMonth, setLoginMonth] = useState('_JanuaryC');
+    const [loginMonth, setLoginMonth] = useState('_FebruaryA');
     const [errorMessage, setErrorMessage] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
