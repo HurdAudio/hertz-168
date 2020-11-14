@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function GainConnectors(audioContext, outputModule, inputModule) {
+function OscillatorConnectors(audioContext, outputModule, inputModule) {
     
-    // connect gain to all other modules
+    // connect oscillator to all other modules
     switch(inputModule.name) {
         case('gain'):
             if (outputModule.output.type === 'input') {
-                outputModule.gain.connect(inputModule.gain);
+                outputModule.oscillator.connect(inputModule.gain);
             } else {
-                outputModule.gain.connect(inputModule.gain.gain);
+                outputModule.oscillator.connect(inputModule.gain.gain);
             }
             break;
         case('master volume'):
-            outputModule.gain.connect(inputModule.gain);
+            outputModule.oscillator.connect(inputModule.gain);
             break;
         case('oscillator'):
             if (outputModule.output.type === 'frequencyModulationInput') {
-                outputModule.gain.connect(inputModule.oscillator.frequency);
+                outputModule.oscillator.connect(inputModule.oscillator.frequency);
             } else if (outputModule.output.type === 'detuneModulationInput') {
-                outputModule.gain.connect(inputModule.oscillator.detune);
+                outputModule.oscillator.connect(inputModule.oscillator.detune);
             } else {
                 // wave type - not a valid connection
             }
@@ -28,4 +28,4 @@ function GainConnectors(audioContext, outputModule, inputModule) {
     }
 }
 
-export default GainConnectors;
+export default OscillatorConnectors;

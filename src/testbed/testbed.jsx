@@ -8,9 +8,13 @@ import './testbed.style.janc.css';
 import '../masterVolume/masterVolume.style.jana.css';
 import '../masterVolume/masterVolume.style.janb.css';
 import '../gain/gain.style.jana.css';
+import '../oscillator/oscillator.style.jana.css';
 import NewGain from '../gain/newGain';
+import NewOscillator from '../oscillator/newOscillator';
 import GainConnectors from '../gain/gainConnectors';
 import GainDisonnectors from '../gain/gainDisconnectors';
+import OscillatorConnectors from '../oscillator/oscillatorConnectors';
+import OscillatorDisconnectors from '../oscillator/oscillatorDisconnectors';
 import { v4 as uuidv4 } from 'uuid';
 
 const modules = [
@@ -60,6 +64,7 @@ function TestBed() {
     const [testbedMonth, setTestbedMonth] = useState('_JanuaryC');
     const [masterVolumeMonth, setMasterVolumeMonth] = useState('_JanuaryB');
     const [gainMonth, setGainMonth] = useState('_JanuaryA');
+    const [oscillatorMonth, setOscillatorMonth] = useState('_JanuaryA');
     const [selectedModule, setSelectedModule] = useState('36eeb817-c015-4ebc-bc21-b20843b3bdf4');
     const [connectors, setConnectors] = useState([]);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0});
@@ -196,6 +201,9 @@ function TestBed() {
                 break;
             case('36eeb817-c015-4ebc-bc21-b20843b3bdf4'):
                 deepCopy.push(NewGain(audioContext));
+                break;
+            case('d0d176df-7e65-4b19-83f3-a8d3de1fff74'):
+                deepCopy.push(NewOscillator(audioContext));
                 break;
             default:
                 console.log('ERROR - unsupported module');
@@ -334,6 +342,42 @@ function TestBed() {
         setTestbedModules(deepCopy);
     }
     
+    const updateOscillatorFrequency = (val, uuid) => {
+        let deepCopy = [...testbedModules];
+        
+        for (let i = 0; i < deepCopy.length; i++) {
+            if (deepCopy[i].uuid === uuid) {
+                deepCopy[i].frequency = val;
+                deepCopy[i].oscillator.frequency.setValueAtTime(deepCopy[i].frequency, audioContext.currentTime);
+            }
+        }
+        setTestbedModules(deepCopy);
+    }
+    
+    const updateOscillatorDetune = (val, uuid) => {
+        let deepCopy = [...testbedModules];
+        
+        for (let i = 0; i < deepCopy.length; i++) {
+            if (deepCopy[i].uuid === uuid) {
+                deepCopy[i].detune = val;
+                deepCopy[i].oscillator.detune.setValueAtTime(deepCopy[i].detune, audioContext.currentTime);
+            }
+        }
+        setTestbedModules(deepCopy);
+    }
+    
+    const updateOscillatorType = (val, uuid) => {
+        let deepCopy = [...testbedModules];
+        
+        for (let i = 0; i < deepCopy.length; i++) {
+            if (deepCopy[i].uuid === uuid) {
+                deepCopy[i].type = val;
+                deepCopy[i].oscillator.type = deepCopy[i].type;
+            }
+        }
+        setTestbedModules(deepCopy);
+    }
+    
     const toggleMute = (uuid) => {
         let deepCopy = [...testbedModules];
         
@@ -439,6 +483,9 @@ function TestBed() {
             case('gain'):
                 GainConnectors(audioContext, deepCopy[outputIndex], deepCopy[inputIndex]);
                 break;
+            case('oscillator'):
+                OscillatorConnectors(audioContext, deepCopy[outputIndex], deepCopy[inputIndex]);
+                break;
             default:
                 console.log('ERROR - Unsupported connector output type');
         }
@@ -468,6 +515,7 @@ function TestBed() {
         let deepConnect = [...connectors];
         let index;
         let nameHolder = '';
+        let nameIndex;
         
         console.log(deepConnect);
         console.log(con);
@@ -478,10 +526,11 @@ function TestBed() {
             }
         }
         console.log(index);
-        nameHolder = deepConnect[index].output.name;
+        nameHolder = deepConnect[index].input.name;
         
         for (let j = 0; j < deepCopy.length; j++) {
             if (deepCopy[j].uuid === deepConnect[index].input.module) {
+                nameIndex = j;
                 deepCopy[j][deepConnect[index].input.type] = {
                     connector: null,
                     module: null,
@@ -500,7 +549,10 @@ function TestBed() {
         }
         switch(nameHolder) {
             case('gain'):
-                GainDisonnectors(audioContext, deepCopy[index]);
+                GainDisonnectors(audioContext, deepCopy[nameIndex]);
+                break;
+            case('oscillator'):
+                OscillatorDisconnectors(audioContext, deepCopy[nameIndex]);
                 break;
             default:
                 console.log('ERROR - bad disconnection');
@@ -559,7 +611,7 @@ function TestBed() {
                 connectorCopy[index].output.type = type;
                 deepCopy.activeConnectorState = false;
                 connectValidModules(connectorCopy[index]);
-            } else if ((type === 'input') || (type === 'modulationInput')) {
+            } else if ((type === 'input') || (type === 'modulationInput') || (type === 'frequencyModulationInput') || (type === 'detuneModulationInput') || (type === 'typeModulationInput')) {
                 if (deepCopy.output.module === uuid) {
                     disconnectActiveConnect();
                     return;
@@ -715,6 +767,104 @@ function TestBed() {
                                             <div className={'gainModulationInputConnector' + gainMonth}
                                                 id={'modulationInput' + module.uuid}
                                                 onClick={(e) => connectModule('modulationInput', module.uuid, 'modulationInput' + module.uuid, module.name, e)}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                            {(module.name === 'oscillator') && (
+                                <div className={'oscillatorContainer' + oscillatorMonth}
+                                    style={{ left: module.left.toString() + 'px', top: module.top.toString() + 'px', zIndex: '2'}}>
+                                    <div className={'oscillatorHandleTitle' + oscillatorMonth}
+                                        onMouseDown={(e) => mouseDownOnHandle(e, module.uuid)}
+                                        onMouseMove={(e) => mouseMoveOnHandle(e, module.uuid)}
+                                        onMouseUp={(e) => mouseUpOnHandle(e, module.uuid)}>
+                                        <p className={'oscillatorName' + oscillatorMonth}>{module.name}</p>
+                                    </div>
+                                    <p className={'oscillatorDelete' + oscillatorMonth}
+                                        onClick={() => removeComponent(module.uuid)}>☒</p>
+                                    <div className={'oscillatorPatchBay' + oscillatorMonth}>
+                                        <p className={'oscillatorOutputLabel' + oscillatorMonth}>out</p>
+                                        <div className={'oscillatorOutputDiv' + oscillatorMonth}>
+                                            <div className={'oscillatorOutputConnector' + oscillatorMonth}
+                                                id={'output' + module.uuid}
+                                                onClick={(e) => connectModule('output', module.uuid, 'output' + module.uuid, module.name, e)}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className={'oscillatorFrequencyDisplayDiv' + oscillatorMonth}>
+                                        <p className={'oscillatorFrequencyLabel' + oscillatorMonth}>hertz:</p>
+                                        <input className={'oscillatorFrequencyDisplay' + oscillatorMonth}
+                                            max="22000.000"
+                                            min="0.001"
+                                            onChange={(e) => updateOscillatorFrequency(e.target.value, module.uuid)}
+                                            step="0.001"
+                                            type="number"
+                                            value={parseFloat(module.frequency).toFixed(3)}/>
+                                    </div>
+                                    <div className={'oscillatorFrequencyModulationInputDiv' + oscillatorMonth}>
+                                        <p className={'oscillatorFrequencyModulationInputLabel' + oscillatorMonth}>modulation:</p>
+                                        <p className={'oscillatorFrequencyModulationInputInLabel' + oscillatorMonth}>in</p>
+                                        <div className={'oscillatorFrequencyModulationInputConnectorDiv' + oscillatorMonth}>
+                                            <div className={'oscillatorOutputConnector' + oscillatorMonth}
+                                                id={'frequencyModulationInput' + module.uuid}
+                                                onClick={(e) => connectModule('frequencyModulationInput', module.uuid, 'frequencyModulationInput' + module.uuid, module.name, e)}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className={'oscillatorFrequencySliderDiv' + oscillatorMonth}>
+                                        <input className={'oscillatorFrequencyRangeInput' + oscillatorMonth}
+                                            max="22000.000"
+                                            min="0.001"
+                                            onChange={(e) => updateOscillatorFrequency(e.target.value, module.uuid)}
+                                            step="0.001"
+                                            type="range"
+                                            value={module.frequency}
+                                            />
+                                    </div>
+                                    <div className={'oscillatorDetuneDiv' + oscillatorMonth}>
+                                        <p className={'oscillatorDetuneLabel' + oscillatorMonth}>detune</p>
+                                        <p className={'oscillatorDetuneCentsLabel' + oscillatorMonth}>cents:</p>
+                                        <input className={'oscillatorDetuneDetuneDisplayInput' + oscillatorMonth}
+                                            max="100.00"
+                                            min="-100.00"
+                                            onChange={(e) => updateOscillatorDetune(e.target.value, module.uuid)}
+                                            step="0.01" 
+                                            type="number"
+                                            value={parseFloat(module.detune).toFixed(2)}/>
+                                        <p className={'oscillatorDetuneModulateInputLabel' + oscillatorMonth}>in</p>
+                                        <div className={'oscillatorDetuneModulationInputConnectorDiv' + oscillatorMonth}>
+                                            <div className={'oscillatorOutputConnector' + oscillatorMonth}
+                                                id={'detuneModulationInput' + module.uuid}
+                                                onClick={(e) => connectModule('detuneModulationInput', module.uuid, 'detuneModulationInput' + module.uuid, module.name, e)}>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className={'oscillatorDetuneSliderDiv' + oscillatorMonth}>
+                                        <input className={'oscillatorDetuneSlider' + oscillatorMonth}
+                                            max="100.00"
+                                            min="-100.00"
+                                            onChange={(e) => updateOscillatorDetune(e.target.value, module.uuid)}
+                                            step="0.01"
+                                            type="range"
+                                            value={module.detune}
+                                            />
+                                    </div>
+                                    <div className={'oscillatorWavetypeDiv' + oscillatorMonth}>
+                                        <p className={'oscillatorTypeLabel' + oscillatorMonth}>type</p>
+                                        <select className={'oscillatorTypeSelector' + oscillatorMonth}
+                                            onChange={(e) => updateOscillatorType(e.target.value, module.uuid)}
+                                            value={module.type}>
+                                            <option value="sine">sine</option>
+                                            <option value="square">square</option>
+                                            <option value="sawtooth">sawtooth</option>
+                                            <option value="triangle">triangle</option>
+                                        </select>
+                                        <p className={'oscillatorDetuneModulateInputLabel' + oscillatorMonth}>in</p>
+                                        <div className={'oscillatorDetuneModulationInputConnectorDiv' + oscillatorMonth}>
+                                            <div className={'oscillatorOutputConnector' + oscillatorMonth}
+                                                id={'typeModulationInput' + module.uuid}
+                                                onClick={(e) => connectModule('typeModulationInput', module.uuid, 'typeModulationInput' + module.uuid, module.name, e)}>
                                             </div>
                                         </div>
                                     </div>
