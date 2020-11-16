@@ -8,6 +8,7 @@ import './testbed.style.janc.css';
 import '../masterVolume/masterVolume.style.jana.css';
 import '../masterVolume/masterVolume.style.janb.css';
 import '../gain/gain.style.jana.css';
+import '../gain/gain.style.janb.css';
 import '../oscillator/oscillator.style.jana.css';
 import NewGain from '../gain/newGain';
 import NewOscillator from '../oscillator/newOscillator';
@@ -63,7 +64,7 @@ function TestBed() {
     const [testbedMainStatus, setTestbedMainStatus] = useState('_Active');
     const [testbedMonth, setTestbedMonth] = useState('_JanuaryC');
     const [masterVolumeMonth, setMasterVolumeMonth] = useState('_JanuaryB');
-    const [gainMonth, setGainMonth] = useState('_JanuaryA');
+    const [gainMonth, setGainMonth] = useState('_JanuaryB');
     const [oscillatorMonth, setOscillatorMonth] = useState('_JanuaryA');
     const [selectedModule, setSelectedModule] = useState('36eeb817-c015-4ebc-bc21-b20843b3bdf4');
     const [connectors, setConnectors] = useState([]);
