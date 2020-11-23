@@ -24,7 +24,8 @@ userhubFooterMessage += 'HurdAudio';
 
 const userData = {
     avatar: 'https://habits168-hurdaudio.s3.amazonaws.com/avatars/lovecraftAvatar.jpg',
-    name: 'Devin Hurd'
+    name: 'Devin Hurd',
+    uuid: '01c131d5-fc4d-4c4d-a97f-2617ee575bda'
 }
 
 const janAVibration = 'https://hertz-168.s3.amazonaws.com/landing/january/vibration/sound_wave_frequency_vibration_hertz_pressure_pitch-512.png';
@@ -293,7 +294,7 @@ function UserHub() {
         <Router>
                 <Switch>
                     <Route path="/testbed">
-                        {TestBed()}
+                        {TestBed(userData)}
                     </Route>
                 </Switch>
             <div className={'userHubContainer' + hubMonth}>

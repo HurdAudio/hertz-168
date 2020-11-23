@@ -12,6 +12,7 @@ require('dotenv').config();
 const app = express();
 
 const users = require('./routes/users.js');
+const testbeds = require('./routes/testbeds.js');
 
 const port = process.env.PORT || 3048;
 
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, '/../', 'node_modules')));
 
 app.use('/users', users);
+app.use('/testbeds', testbeds);
 
 
 app.get('/test', (req, res, next) => {
