@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { NavLink } from 'react-router-dom';
 import audio_157431_1280 from '../img/audio_157431_1280.png';
@@ -18,6 +18,9 @@ import GainDisonnectors from '../gain/gainDisconnectors';
 import OscillatorConnectors from '../oscillator/oscillatorConnectors';
 import OscillatorDisconnectors from '../oscillator/oscillatorDisconnectors';
 import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
+
+let testbedModuleUuid = null;
 
 const modules = [
     {
@@ -60,7 +63,7 @@ const strokeWidth = 15;
 let pos = {};
 let audioContext = null;
 
-function TestBed() {
+function TestBed(userData) {
     
     const [testbedMainStatus, setTestbedMainStatus] = useState('_Active');
     const [testbedMonth, setTestbedMonth] = useState('_JanuaryC');
@@ -123,6 +126,7 @@ function TestBed() {
         deepCopy.splice(index, 1);
         
         setTestbedModules(deepCopy);
+        axios.patch(`/testbeds/${testbedModuleUuid}`, { modules: { testbedModules: deepCopy }});
     }
     
     const moduleClearConnect = (module) => {
@@ -188,6 +192,7 @@ function TestBed() {
         });
         deepCopy.splice(index, 1);
         setTestbedModules(deepCopy);
+        axios.patch(`/testbeds/${testbedModuleUuid}`, { modules: { testbedModules: deepCopy }});
     }
     
     const changeSelectedModule = (val) => {
@@ -212,6 +217,8 @@ function TestBed() {
         }
         
         setTestbedModules(deepCopy);
+        axios.patch(`/testbeds/${testbedModuleUuid}`, { modules: { testbedModules: deepCopy }});
+        
     }
     
     const mouseDownOnHandle = (e, uuid) => {
@@ -238,6 +245,7 @@ function TestBed() {
         setTestbedModules(deepCopy);
         e.stopPropagation();
         e.preventDefault();
+        axios.patch(`/testbeds/${testbedModuleUuid}`, { modules: { testbedModules: deepCopy }});
     }
     
     const mouseMoveOnHandle = (e, uuid) => {
@@ -257,6 +265,7 @@ function TestBed() {
         setTestbedModules(deepCopy);
         e.stopPropagation();
         e.preventDefault();
+        axios.patch(`/testbeds/${testbedModuleUuid}`, { modules: { testbedModules: deepCopy }});
     }
     
     const mouseUpOnHandle = (e, uuid) => {
@@ -271,6 +280,7 @@ function TestBed() {
         setTestbedModules(deepCopy);
         e.stopPropagation();
         e.preventDefault();
+        axios.patch(`/testbeds/${testbedModuleUuid}`, { modules: { testbedModules: deepCopy }});
     }
     
     const setConnections = () => {
@@ -286,9 +296,17 @@ function TestBed() {
                 deepCopy[i].gain = audioContext.createGain();
                 deepCopy[i].gain.gain.setValueAtTime(deepCopy[i].value, audioContext.currentTime);
             }
+            if (deepCopy[i].name === 'oscillator') {
+                deepCopy[i].oscillator = audioContext.createOscillator();
+                deepCopy[i].oscillator.detune.setValueAtTime(deepCopy[i].detune, audioContext.currentTime);
+                deepCopy[i].oscillator.frequency.setValueAtTime(deepCopy[i].frequency, audioContext.currentTime);
+                deepCopy[i].oscillator.type = deepCopy[i].type;
+                deepCopy[i].oscillator.start(); 
+            }
         }
         
         setTestbedModules(deepCopy);
+        axios.patch(`/testbeds/${testbedModuleUuid}`, { modules: { testbedModules: deepCopy }});
     }
     
     const disconnectActiveConnect = () => {
@@ -342,6 +360,7 @@ function TestBed() {
         }
         
         setTestbedModules(deepCopy);
+        axios.patch(`/testbeds/${testbedModuleUuid}`, { modules: { testbedModules: deepCopy }});
     }
     
     const updateOscillatorFrequency = (val, uuid) => {
@@ -354,6 +373,7 @@ function TestBed() {
             }
         }
         setTestbedModules(deepCopy);
+        axios.patch(`/testbeds/${testbedModuleUuid}`, { modules: { testbedModules: deepCopy }});
     }
     
     const updateOscillatorDetune = (val, uuid) => {
@@ -366,6 +386,7 @@ function TestBed() {
             }
         }
         setTestbedModules(deepCopy);
+        axios.patch(`/testbeds/${testbedModuleUuid}`, { modules: { testbedModules: deepCopy }});
     }
     
     const updateOscillatorType = (val, uuid) => {
@@ -378,6 +399,7 @@ function TestBed() {
             }
         }
         setTestbedModules(deepCopy);
+        axios.patch(`/testbeds/${testbedModuleUuid}`, { modules: { testbedModules: deepCopy }});
     }
     
     const toggleMute = (uuid) => {
@@ -395,6 +417,7 @@ function TestBed() {
         }
         
         setTestbedModules(deepCopy);
+        axios.patch(`/testbeds/${testbedModuleUuid}`, { modules: { testbedModules: deepCopy }});
     }
     
     const getX = (element) => {
@@ -565,6 +588,7 @@ function TestBed() {
         setTestbedModules(deepCopy);
         
         removeSelectedConnection(con);
+        axios.patch(`/testbeds/${testbedModuleUuid}`, { modules: { testbedModules: deepCopy }});
         
     }
     
@@ -573,7 +597,10 @@ function TestBed() {
         let connectorCopy = [...connectors];
         let connection;
         let index;
-        event.stopPropagation();
+        if (event !== null) {
+            event.stopPropagation();
+        }
+        
         // connect output -> input
         
         // Check for existing connector
@@ -688,6 +715,80 @@ function TestBed() {
         setUserConnection(deepCopy);
         setConnectors(connectorCopy);
     }
+    
+    const initializeConnections = (mods) => {
+        for (let i = 0; i < mods.length; i++) {
+            switch(mods[i].name) {
+                case('master volume'):
+                    // master volume output hardwired to speakers already
+                    break;
+                case('gain'):
+                    if (mods[i].output.module !== null) {
+                        connectModule('output', mods[i].uuid, 'output' + mods[i].uuid, mods[i].name, null);
+                        connectModule(mods[i].output.type, mods[i].output.module, mods[i].output.type + mods[i].output.module, mods[i].output.name, null);
+                    }
+                    break;
+                case('oscillator'):
+                    if (mods[i].output.module !== null) {
+                        connectModule('output', mods[i].uuid, 'output' + mods[i].uuid, mods[i].name, null);
+                        connectModule(mods[i].output.type, mods[i].output.module, mods[i].output.type + mods[i].output.module, mods[i].output.name, null);
+                    }
+                    break;
+                default:
+                    console.log('unsupported module');
+            }
+        }
+    }
+    
+    useEffect(() => {
+        if (audioContext === null) {
+            audioContext = new AudioContext();
+            setConnections();
+        }
+        if (userConnection.activeConnectorState) {
+            disconnectActiveConnect();
+        }
+        if (!userData.uuid) {
+            userData.uuid = '01c131d5-fc4d-4c4d-a97f-2617ee575bda';
+        }
+        axios.get(`/testbeds/byuser/${userData.uuid}`)
+        .then(userBedData => {
+            const userBed = userBedData.data;
+            const initObject = [{
+                uuid: "f94152ad-b07b-48b4-989f-8b9dc063210c",
+                dragging: false,
+                gain: audioContext.createGain(),
+                input: {
+                    connector: null,
+                    module: null,
+                    name: null,
+                    type: null
+                },
+                left: 1150,
+                mute: false,
+                name: "master volume",
+                top: 450,
+                value: 0.4
+            }];
+            if (userBed.length < 1) {
+                axios.post(`/testbeds`, {
+                    user_uuid: userData.uuid,
+                    modules: {
+                        testbedModules: initObject
+                    }
+                }).then(moduleData => {
+                    testbedModuleUuid = moduleData.data.uuid;
+                    setTestbedModules(initObject);
+                    setConnections();
+                });
+            } else {
+                testbedModuleUuid = userBed[0].uuid;
+                setTestbedModules(userBed[0].modules.testbedModules);
+                setConnections();
+                initializeConnections(userBed[0].modules.testbedModules);
+            }
+        });
+    }, []);
     
     return(
         <div className={'testbedContainer' + testbedMainStatus + testbedMonth}
