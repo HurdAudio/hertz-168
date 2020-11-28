@@ -10,6 +10,7 @@ import {
 import './userhub.style.jana.css';
 import './userhub.style.janb.css';
 import './userhub.style.janc.css';
+import './userhub.style.feba.css';
 import TestBed from '../testbed/testbed';
 
 let userhubFooterMessage = '';
@@ -31,6 +32,7 @@ const userData = {
 const janAVibration = 'https://hertz-168.s3.amazonaws.com/landing/january/vibration/sound_wave_frequency_vibration_hertz_pressure_pitch-512.png';
 const janBVibration = 'https://hertz-168.s3.amazonaws.com/landing/january/vibration/aca6b497ffa33ed2ff03ac84be7a9678.jpg';
 const janCVibration = 'https://hertz-168.s3.amazonaws.com/landing/january/vibration/soundwaves.jpg';
+const febAVibration = 'https://hertz-168.s3.amazonaws.com/landing/february/vibrations/d1gio8i-0f592609-d012-4baf-8d98-2cd5f4110cc4.jpg';
 
 const placeholderMixer = [
     {
@@ -161,8 +163,8 @@ const placeholderCompositions = [
 
 function UserHub() {
     
-    const [hubMonth, setHubMonth] = useState('_JanuaryC');
-    const [logoImage, setLogoImage] = useState(janCVibration);
+    const [hubMonth, setHubMonth] = useState('_FebruaryA');
+    const [logoImage, setLogoImage] = useState(febAVibration);
     const [tabState, setTabState] = useState({
         compose: false,
         home: true,
