@@ -6,6 +6,7 @@ import './login.style.jana.css';
 import './login.style.janb.css';
 import './login.style.janc.css';
 import './login.style.feba.css';
+import './login.style.febb.css';
 import EncryptPassword from './encryptPassword';
 import SetStatus from './setLoginStatus';
 import axios from 'axios';
@@ -23,7 +24,7 @@ landingFooterMessage += 'HurdAudio';
 
 function Login() {
     
-    const [loginMonth, setLoginMonth] = useState('_FebruaryA');
+    const [loginMonth, setLoginMonth] = useState('_FebruaryB');
     const [errorMessage, setErrorMessage] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
