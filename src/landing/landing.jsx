@@ -12,6 +12,7 @@ import './landing.style.janb.css';
 import './landing.style.janc.css';
 import './landing.style.feba.css';
 import './landing.style.febb.css';
+import './landing.style.febc.css';
 
 const now = new Date();
 
@@ -29,13 +30,14 @@ const janBVibration = 'https://hertz-168.s3.amazonaws.com/landing/january/vibrat
 const janCVibration = 'https://hertz-168.s3.amazonaws.com/landing/january/vibration/soundwaves.jpg';
 const febAVibration = 'https://hertz-168.s3.amazonaws.com/landing/february/vibrations/d1gio8i-0f592609-d012-4baf-8d98-2cd5f4110cc4.jpg';
 const febBVibration = 'https://hertz-168.s3.amazonaws.com/landing/february/vibrations/vibration_by_piethein21_d39lljw-pre.jpg';
+const febCVibration = 'https://hertz-168.s3.amazonaws.com/landing/february/vibrations/48411753596_c16cb48c9a_k.jpg';
 
 let toLogin = false;
 
 function Landing() {
     
-    const [landingMonth, setLandingMonth] = useState('_FebruaryB');
-    const [landingVibaration, setLandingVibration] = useState(febBVibration);
+    const [landingMonth, setLandingMonth] = useState('_FebruaryC');
+    const [landingVibaration, setLandingVibration] = useState(febCVibration);
     
     const checkLogin = () => {
         if (window.localStorage.getItem('vibratingAt168Hertz') === 'true') {
